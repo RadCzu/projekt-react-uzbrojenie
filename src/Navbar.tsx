@@ -4,9 +4,9 @@ import './App.css';
 const Navbar = () => {
   return (  
     <nav className="navbar">
-      <p>
+      <h1>
         <label>Oręż Średniowiecza</label>
-      </p>
+      </h1>
       <div className="search-bar">   
         <Link to="/"> 
           <button className="search-button">
