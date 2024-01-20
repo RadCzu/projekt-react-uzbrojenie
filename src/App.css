@@ -2,6 +2,10 @@
   font-family: 'MedievalSharp', cursive;
 }
 
+body html {
+  height: 100%;
+}
+
 .navbar {
   background-color: #EED06C;
   display: flex;
@@ -55,18 +59,27 @@
   padding: 10px;
 }
 
-/* bannery */
+
+.content {
+  display: flex;
+}
 
 .banner-left, .banner-right {
   width: 20%;
-  height: 100%;
+  height: 100vh;
   background-color: #293A45;
 }
 
 .banner-left {
-  float: left; /* Ustaw baner z lewej strony */
+  float: left;
 }
 
 .banner-right {
-  float: right; /* Ustaw baner z prawej strony */
+  float: right;
+}
+
+.homepage {
+  background-color: #699894;
+  flex-grow: 1;
+  height: 100vh;
 }
