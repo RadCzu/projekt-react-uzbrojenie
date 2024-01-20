@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Navbar from './Navbar';
 import LeftBanner from './LeftBanner';
 import RightBanner from './RightBanner';
+import Home from '.Home';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Navbar />
         <div className="content">
           <LeftBanner />
+          <Home />
           <RightBanner />
         </div>
       </div>
