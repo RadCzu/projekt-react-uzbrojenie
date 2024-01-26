@@ -62,11 +62,11 @@ body html {
 
 .content {
   display: flex;
+  height: 110%;
 }
 
 .banner-left, .banner-right {
   width: 20%;
-  height: 100vh;
   background-color: #293A45;
 }
 
@@ -81,5 +81,117 @@ body html {
 .homepage {
   background-color: #699894;
   flex-grow: 1;
-  height: 100vh;
 }
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.product-preview-container {
+  height: 100%;
+  display: inline-block;
+  border: 1px solid #ddd;
+  padding: 10px; 
+  margin: 5.8%; 
+  background-color: white;
+  cursor: pointer;
+  width: 20%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product-preview-label {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 8px; 
+  padding: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+}
+
+.product-preview-image {
+  width: 250px;
+  height: 250px;
+  margin: 5px;
+  padding: 5px;
+  border: #293A45;
+  border-width: 2px;
+  border-radius: 10px;
+  border-style: solid;
+  cursor: pointer;
+}
+
+.product-preview-rating {
+  max-width: 100%; 
+  height: auto;
+}
+
+#keywords-list {
+  grid-area: keywords;
+  color: #293A45;
+  font:bold;
+  font-style: italic;
+  margin-left: 5%;
+  font-size: 20px;
+  height: 40px;
+}
+
+.product-article-image {
+  grid-area: article-image;
+  width: 400px;
+  height: 400px;
+  margin: 10%;
+  margin-bottom: 4%;
+  border: black;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 10px;
+  padding:2%;
+  background-color: #EED06C;
+}
+
+.product-article-label {
+  grid-area: article-name;
+  font-size: 300%;
+  font-weight: 600;
+  height: 10%;
+  padding-top:8%;
+  padding-bottom:8%;
+  margin: 0px;
+  margin-right: 10%;
+  border-bottom: black;
+  border-width: 0px;
+  border-style: solid;
+  border-bottom-width: 10px;
+}
+
+.product-article-describtion {
+  grid-area: describtion;
+  align-self: flex-start;
+  margin-right: 10%;
+  margin-top: 0%;
+  font-size: 25px;
+  background-color: #fff;
+  padding: 20px;
+  height: 75%;
+  border-radius: 10px;
+  margin-bottom: 4%;
+}
+.product-article-rating {
+  grid-area: review;
+  display: flex;
+  margin-left: 5%;
+  font-size: 25px;
+  height: 40px;
+  align-items: center;
+}
+
+.product-article-rating label {
+  padding-top: 5px;
+}
+

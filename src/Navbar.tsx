@@ -8,7 +8,7 @@ const Navbar = () => {
         <label>Oręż Średniowiecza</label>
       </h1>
       <div className="search-bar">   
-        <Link to="/"> 
+        <Link to="/home"> 
           <button className="search-button">
             <img className="home-icon" src="images/castle.png" />
           </button>

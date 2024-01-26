@@ -5,6 +5,7 @@ import LeftBanner from './LeftBanner';
 import RightBanner from './RightBanner';
 import Home from './Home';
 import Test from './Test';
+import Article from './Article';
 
 function App() {
   return (
@@ -15,9 +16,9 @@ function App() {
           <LeftBanner />
           <Routes>
             <Route path = "/" element = {<Home/>}/>
-          </Routes>
-          <Routes>
+            <Route path = "/home" element = {<Home/>}/>
             <Route path = "/test" element = {<Test/>}/>
+            <Route path = "/article/:id" element = {<Article/>}/>
           </Routes>
           <RightBanner />
         </div>

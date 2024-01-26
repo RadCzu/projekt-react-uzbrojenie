@@ -3,12 +3,12 @@ const link = require('./create_connection')
 class Actions {
 
   getData(req, res) {
-    let sql = `SELECT * FROM bron`;
+    const { sql } = req.query;
+    console.log('SQL GET query recieved: ' + sql);
     link.query(sql, (err, results, fields) => {
       if (err) {
         return console.error(err.message);
       }
-      // get  rows
       console.table(results);
       res.status(200).json(results);
     });
