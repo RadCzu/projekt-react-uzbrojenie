@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import Links, { getId } from './Links'; // Załóżmy, że funkcja getId jest eksportowana z tego pliku
+import Links, { getId } from './Links';
 
 function roundAverageReview(average: number): number {
   const averageRating = average;
@@ -19,7 +19,9 @@ const Article = () => {
     link: string;
     description: string;
     avgReview: number;
-  } | null>(null);
+  }[] | null>(null);
+
+  const [loading, setLoading] = useState(true);
 
   const fetchData = async (productId: number) => {
     try {
@@ -48,35 +50,47 @@ const Article = () => {
       let data = await response.json();
 
       setProductData(data);
+      setLoading(false); // Zaktualizuj stan ładowania po otrzymaniu danych
     } catch (error) {
       console.error('Error fetching data:', error);
+      setLoading(false); // Jeśli wystąpił błąd, również zaktualizuj stan ładowania
     }
   };
 
-  useEffect(() => {
+  const waitForData = async () => {
+    while (!getId()) {
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Oczekaj 1 sekundę
+    }
+
     const productId = getId();
-    console.log(`productId: ${productId}`);
     console.log(`page is article/${productId}`);
     if (productId) {
       fetchData(productId);
     }
+  };
+
+  useEffect(() => {
+    waitForData();
   }, []);
 
-  console.log(`productId: ${getId()}`);
-  console.log(`productData:`);
-  console.log(productData);
+  if (loading) {
+    return <p>Loading...</p>;
+  }
 
+  if(productData) {
+    console.log(productData[0]);
+  }
   return (
     <>
-      {productData !== null && productData.name !== undefined ? (
-        <div className="product-article-container homepage" data-product-id={productData.id}>
-          <label className="product-article-label">{productData.name}</label>
-          <img className="product-article-image" src={productData.link} alt={`Preview of ${productData.name}`} />
-          <p className="product-article-description">{productData.description}</p>
+      {productData !== null ? (
+        <div className="product-article-container homepage" data-product-id={productData[0].id}>
+          <label className="product-article-label">{productData[0].name}</label>
+          <img className="product-article-image" src={productData[0].link} alt={`Preview of ${productData[0].name}`} />
+          <p className="product-article-description">{productData[0].description}</p>
           <div className="product-article-rating">
             <label>Średnia Ocena:</label>
-            {productData.avgReview !== undefined && (
-              <img src={`/images/rating-${roundAverageReview(productData.avgReview)}.png`} alt={`Rating for ${productData.name}`} />
+            {productData[0].avgReview !== undefined && (
+              <img src={`/images/rating-${roundAverageReview(productData[0].avgReview)}.png`} alt={`Rating for ${productData[0].name}`} />
             )}
           </div>
           <div className="keywords-list">
