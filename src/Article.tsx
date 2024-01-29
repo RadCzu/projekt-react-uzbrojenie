@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './App.css';
-import Links, { getId } from './Links';
+import Links from './Links';
 
 function roundAverageReview(average: number): number {
   const averageRating = average;
@@ -13,6 +14,9 @@ function roundAverageReview(average: number): number {
 }
 
 const Article = () => {
+  const location = useLocation();
+  const productId = location.pathname.split('/').pop();
+
   const [productData, setProductData] = useState<{
     id: number;
     name: string;
@@ -21,9 +25,7 @@ const Article = () => {
     avgReview: number;
   }[] | null>(null);
 
-  const [loading, setLoading] = useState(true);
-
-  const fetchData = async (productId: number) => {
+  const fetchData = async () => {
     try {
       const sql = `SELECT
         bron.IdBroni as id,
@@ -50,39 +52,19 @@ const Article = () => {
       let data = await response.json();
 
       setProductData(data);
-      setLoading(false); // Zaktualizuj stan ładowania po otrzymaniu danych
     } catch (error) {
       console.error('Error fetching data:', error);
-      setLoading(false); // Jeśli wystąpił błąd, również zaktualizuj stan ładowania
-    }
-  };
-
-  const waitForData = async () => {
-    while (!getId()) {
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Oczekaj 1 sekundę
-    }
-
-    const productId = getId();
-    console.log(`page is article/${productId}`);
-    if (productId) {
-      fetchData(productId);
     }
   };
 
   useEffect(() => {
-    waitForData();
-  }, []);
+    console.log(`page is article/${productId}`);
+    fetchData();
+  }, [productId]);
 
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
-  if(productData) {
-    console.log(productData[0]);
-  }
   return (
     <>
-      {productData !== null ? (
+      {productId && productData !== null && productData[0] !== undefined ? (
         <div className="product-article-container homepage" data-product-id={productData[0].id}>
           <label className="product-article-label">{productData[0].name}</label>
           <img className="product-article-image" src={productData[0].link} alt={`Preview of ${productData[0].name}`} />
@@ -109,7 +91,7 @@ const Article = () => {
         </div>
       ) : (
         <div className="no-results-container">
-          <p>Brak danych dla produktu</p>
+          <p>Brak danych dla produktu o ID: {productId}</p>
         </div>
       )}
     </>

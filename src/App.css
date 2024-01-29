@@ -131,14 +131,36 @@ body html {
   height: auto;
 }
 
+#product-article-container {
+  margin: 0;
+  display: grid;
+  grid-template-areas:
+    "article-image article-name"
+    "article-image describtion"
+    "keywords keywords"
+    "review review";
+}
+
+.product-article-container {
+  margin: 0;
+  display: grid;
+  text-align: left;
+  grid-template:
+    "article-image article-name" 25%
+    "article-image describtion"
+    "keywords keywords"
+    "review review"
+    /45% 55%;
+}
+
 #keywords-list {
   grid-area: keywords;
   color: #293A45;
-  font:bold;
-  font-style: italic;
+  font: bold italic 20px;
   margin-left: 5%;
-  font-size: 20px;
   height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .product-article-image {
@@ -146,42 +168,36 @@ body html {
   width: 400px;
   height: 400px;
   margin: 10%;
-  margin-bottom: 4%;
-  border: black;
-  border-style: solid;
-  border-width: 5px;
+  border: 5px solid black;
   border-radius: 10px;
-  padding:2%;
+  padding: 2%;
   background-color: #EED06C;
 }
 
 .product-article-label {
   grid-area: article-name;
-  font-size: 300%;
+  height: 50%;
+  font-size: 3rem;
   font-weight: 600;
-  height: 10%;
-  padding-top:8%;
-  padding-bottom:8%;
-  margin: 0px;
+  margin-top: 10%;
+  padding: 0px;
   margin-right: 10%;
-  border-bottom: black;
-  border-width: 0px;
-  border-style: solid;
-  border-bottom-width: 10px;
+  margin-bottom: 0px;
+  border-bottom: 10px solid black;
 }
 
-.product-article-describtion {
+.product-article-description {
   grid-area: describtion;
-  align-self: flex-start;
   margin-right: 10%;
-  margin-top: 0%;
   font-size: 25px;
   background-color: #fff;
   padding: 20px;
+  margin-top: 0px;
   height: 75%;
   border-radius: 10px;
   margin-bottom: 4%;
 }
+
 .product-article-rating {
   grid-area: review;
   display: flex;
@@ -193,5 +209,11 @@ body html {
 
 .product-article-rating label {
   padding-top: 5px;
+}
+
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
