@@ -1,5 +1,6 @@
 * {
   font-family: 'MedievalSharp', cursive;
+  margin-bottom: 0px;
 }
 
 body html {
@@ -61,24 +62,30 @@ body html {
 
 
 .content {
-  display: flex;
-  height: 110%;
+  display: grid;
+  text-align: left;
+  grid-template:
+    "leftside middle rightside"
+    /20% 60% 20%;
+  height:100%;
 }
 
 .banner-left, .banner-right {
-  width: 20%;
   background-color: #293A45;
 }
 
 .banner-left {
+  grid-area: leftside;
   float: left;
 }
 
 .banner-right {
+  grid-area: rightside;
   float: right;
 }
 
 .homepage {
+  grid-area: middle;
   background-color: #699894;
   flex-grow: 1;
 }
@@ -94,7 +101,7 @@ body html {
   display: inline-block;
   border: 1px solid #ddd;
   padding: 10px; 
-  margin: 5.8%; 
+  margin: 5%; 
   background-color: white;
   cursor: pointer;
   width: 20%;
@@ -120,6 +127,7 @@ body html {
   margin: 5px;
   padding: 5px;
   border: #293A45;
+  background-color: white;
   border-width: 2px;
   border-radius: 10px;
   border-style: solid;
@@ -131,36 +139,39 @@ body html {
   height: auto;
 }
 
-#product-article-container {
-  margin: 0;
-  display: grid;
-  grid-template-areas:
-    "article-image article-name"
-    "article-image describtion"
-    "keywords keywords"
-    "review review";
-}
-
 .product-article-container {
   margin: 0;
   display: grid;
   text-align: left;
   grid-template:
-    "article-image article-name" 25%
+    "article-image article-name"
     "article-image describtion"
     "keywords keywords"
     "review review"
     /45% 55%;
 }
 
-#keywords-list {
+.keywords-list {
   grid-area: keywords;
   color: #293A45;
-  font: bold italic 20px;
+  font: bold italic 10px;
+  font-size: 20px;
   margin-left: 5%;
   height: 40px;
   display: flex;
   align-items: center;
+}
+
+.keywords-list a {
+  text-decoration: none;
+  color: #293A45;
+  font-weight: bold;
+  font-style: italic; 
+}
+
+.keywords-list a:hover {
+  text-decoration: underline; 
+  color: #0056b3; 
 }
 
 .product-article-image {
@@ -168,6 +179,9 @@ body html {
   width: 400px;
   height: 400px;
   margin: 10%;
+  margin-bottom: 0px;
+  padding-bottom: 1%;
+  margin-right: 5%;
   border: 5px solid black;
   border-radius: 10px;
   padding: 2%;
@@ -176,12 +190,13 @@ body html {
 
 .product-article-label {
   grid-area: article-name;
-  height: 50%;
+  height: 60px;
   font-size: 3rem;
   font-weight: 600;
   margin-top: 10%;
   padding: 0px;
   margin-right: 10%;
+  margin-left: 5%;
   margin-bottom: 0px;
   border-bottom: 10px solid black;
 }
@@ -189,11 +204,12 @@ body html {
 .product-article-description {
   grid-area: describtion;
   margin-right: 10%;
+  margin-left: 5%;
+  margin-top: 2%;
   font-size: 25px;
   background-color: #fff;
   padding: 20px;
-  margin-top: 0px;
-  height: 75%;
+  height: 295px;
   border-radius: 10px;
   margin-bottom: 4%;
 }
@@ -215,5 +231,78 @@ body html {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 1%
+}
+
+.product-review-container {
+  padding: 20px;
+  font-size: 50px;
+  text-align: left;
+  background-color: #699894;
+}
+
+.review {
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: white;
+  border-radius: 20px;
+  margin-top: 5%;
+}
+
+.reviews-headline {
+  padding-left:2%;
+  margin: 1%;
+  font-size: 40px;
+  font-weight: bolder;
+  color: #333;  
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between; 
+  width: 100%; 
+  margin-bottom: 10px;
+
+  font-size: 25px;
+}
+
+.reviewer-name {
+  font-weight: bold;
+  padding-left:20px;
+}
+
+.review-time {
+  padding-right:20px;
+}
+
+.review-rating {
+  width: 150px; 
+  height:100%;
+  justify-content: left;
+  text-align: left;
+  padding-left:20px;
+}
+
+.review-content {
+  margin-top: 10px;
+  text-align: left;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  font-size: 20px;
+}
+
+#reviews-header {
+  display: flex;
+  justify-content: space-between; 
+  border-bottom: black;
+  border-width: 0px;
+  border-style: solid;
+  border-bottom-width: 10px;
+  width:100%;
+  margin: 0px;
+}
+
+#reviews-headline {
+  margin:0px;
 }
 
