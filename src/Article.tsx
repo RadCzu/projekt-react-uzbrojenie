@@ -95,8 +95,21 @@ const Article = () => {
         },
       });
 
-      let result = await response.json();
-      setReviews(result);
+      let result: {
+        rating: number,
+        reviewerName: string,
+        time: string,
+        date: string,
+        content: string,
+      }[] = await response.json();
+      
+      if(result) {
+        const newreviews = result.map((review) => ({
+          ...review,
+          date: review.date.split('T')[0],
+        }));
+        setReviews(newreviews);
+      }
 
     } catch (error) {
       console.error('Error fetching reviews:', error);
@@ -155,7 +168,7 @@ const Article = () => {
                   <div key={index} className="review">
                     <div className="review-header">
                       <p className="reviewer-name">{review.reviewerName}</p>
-                      <p className="review-time">{review.time}</p>
+                      <p className="review-time">{review.time + " " + review.date}</p>
                     </div>
                     <div className="review-rating">
                       <img src={`../images/rating-${review.rating}.png`} alt={`Rating for ${productData[0].name}`} />

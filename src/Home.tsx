@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './App.css';
-import Links, { setId } from './Links';
+import Links from './Links';
 
 function roundAverageReview(average: number): number {
   const averageRating = average;
@@ -20,10 +20,6 @@ const Home = () => {
     link: string;
     avgReview: number;
   }[] | null>(null);
-
-  const handleLinkClick = (id: number) => {
-    setId(id);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -67,7 +63,7 @@ const Home = () => {
       <div className="product-container">
         {weaponsData && weaponsData.length > 0 ? (
           weaponsData.map((weapon) => (
-            <Link key={weapon.id} to={`/article/${weapon.id}`} className="product-preview-container" data-product-id={weapon.id} onClick={() => handleLinkClick(weapon.id)}>
+            <Link key={weapon.id} to={`/article/${weapon.id}`} className="product-preview-container" data-product-id={weapon.id}>
               <div>
                 <label className="product-preview-label">{weapon.name}</label>
               </div>

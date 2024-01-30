@@ -6,6 +6,7 @@ import RightBanner from './RightBanner';
 import Home from './Home';
 import Test from './Test';
 import Article from './Article';
+import SearchList from './SearchList';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path = "/home" element = {<Home/>}/>
             <Route path = "/test" element = {<Test/>}/>
             <Route path = "/article/:id" element = {<Article/>}/>
+            <Route path = "/search/:word" element = {<SearchList/>}/>
           </Routes>
           <RightBanner />
         </div>
