@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './App.css';
 import Links from './Links';
+import ReviewForm from './ReviewForm';
 
 function roundAverageReview(average: number): number {
   const averageRating = average;
@@ -36,6 +37,8 @@ const Article = () => {
     date: string;
     content: string;
   }[] | null>(null);
+
+  const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -83,6 +86,11 @@ const Article = () => {
     setKeywords(result);
   };
 
+  const finishForm = () => {
+    setIsReviewFormVisible(false);
+  };
+
+  
   const fetchReviews = async (weaponId: number) => {
     try {
       console.log("fetching reviews");
@@ -125,6 +133,13 @@ const Article = () => {
     }
   }, [productId]);
 
+  useEffect(() => {
+    console.log(`refreshing article/${productId}`);
+    if(productId){
+      fetchReviews(parseInt(productId));
+    }
+  }, [isReviewFormVisible]);
+
   return (
     <div className="article-container">
       {productId && productData !== null && productData[0] !== undefined ? (
@@ -154,11 +169,11 @@ const Article = () => {
               </p>
             </div>
           </div>
-
+          {!isReviewFormVisible ? (
           <div className="product-review-container">
             <div className="reviews-header">
               <p className="reviews-headline">Recenzje:</p>
-              <button id="add-review-button" className="add-review">
+              <button id="add-review-button" className="add-review" onClick={() => setIsReviewFormVisible(true)}>
                 Dodaj Recenzję
               </button>
             </div>
@@ -183,6 +198,9 @@ const Article = () => {
               )}
             </div>
           </div>
+          ): (
+            <ReviewForm finishForm={finishForm} />
+          )}
         </>
       ) : (
         <div className="no-results-container">

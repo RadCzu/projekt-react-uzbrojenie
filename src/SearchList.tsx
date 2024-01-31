@@ -52,9 +52,6 @@ Funkcja licząca podobieństwo w skali 0-1
 function calculateSimilarity(str1: string, str2: string): number {
   const maxLength = Math.max(str1.length, str2.length);
   const distance = levenshteinDistance(str1, str2);
-  console.log(`comparing: ${str1} and ${str2}`);
-  console.log(`maxLen: ${maxLength}`);
-  console.log(`dystans: ${distance}`);
   const similarity = 1 - distance / maxLength;
 
   return similarity;
@@ -112,7 +109,6 @@ const SearchList = () => {
       let data = await response.json();
 
       setWeaponsData(data);
-      console.log(weaponsData);
 
       return Promise.resolve();
     } catch (error) {
@@ -143,9 +139,7 @@ const SearchList = () => {
       const finalResult: {id: number, keyword: string}[] = [];
       if (data) {
         data.forEach(element => {
-          console.log(element.keyword);
           const similarity = calculateSimilarity(element.keyword, searchedKeyword);
-          console.log(similarity);
           if (similarity > 0.75) {
             finalResult.push(element);
           }
